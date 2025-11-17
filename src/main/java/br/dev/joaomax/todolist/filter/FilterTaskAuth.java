@@ -1,16 +1,38 @@
 package br.dev.joaomax.todolist.filter;
 
 import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Base64;
 
 @Component
-public class FilterTaskAuth implements Filter {
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+public class FilterTaskAuth extends OncePerRequestFilter {
 
-        System.out.println("Chegou no filtro");
-        filterChain.doFilter(servletRequest, servletResponse);
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+        //Pegar autenticação (usuario e senha)
+        var authorization = request.getHeader("Authorization");
+        var authEncoded = authorization.substring("Basic".length()).trim();
+
+        byte[] authDecode = Base64.getDecoder().decode(authEncoded);
+
+        var authString = new String(authDecode);
+
+        String[] credentials = authString.split(":");
+        String username = credentials[0];
+        String password = credentials[1];
+        System.out.println(username + password);
+
+        //Validar usuario
+
+        //Validar senha
+
+        filterChain.doFilter(request, response);
+
     }
 }
