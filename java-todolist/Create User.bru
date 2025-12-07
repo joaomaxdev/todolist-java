@@ -6,8 +6,16 @@ meta {
 
 post {
   url: http://localhost:8080/users/
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "name": "joao",
+    "username": "jao",
+    "password": "123123"
+  }
 }
 
 settings {

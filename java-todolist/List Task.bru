@@ -7,9 +7,15 @@ meta {
 get {
   url: http://localhost:8080/tasks/
   body: none
-  auth: inherit
+  auth: basic
+}
+
+auth:basic {
+  username: jao
+  password: 123123
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }

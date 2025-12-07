@@ -1,0 +1,27 @@
+meta {
+  name: Edit Task
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/tasks/3cf80c56-1ecf-4e64-97b5-7f1e219ef6cc
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: jao
+  password: 123123
+}
+
+body:json {
+  {
+    "title":"Alterando Titulo da Aula"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
